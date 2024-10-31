@@ -5,10 +5,12 @@ import CreateMoim from '../../pages/CreateMoim';
 import TopicResult from '../../pages/TopicResult';
 import TopicDetail from '../../pages/TopicDetail';
 import Review from '../../pages/Review';
+import Splash from '../../pages/Splash';
 
 
 export const routes = [
-    {path: '/' , element: <Home/>},
+    {path: '/' , element: <Splash/>},
+    { path: '/home', element: <Home /> },
     {path: '/createmoim' , element: <CreateMoim/>},
     {path: '/topicresult' , element: <TopicResult/>},
     {path: '/topicdetail' , element: <TopicDetail />},

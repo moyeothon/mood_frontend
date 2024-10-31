@@ -1,9 +1,14 @@
 import React from 'react'
 import { PageContainer } from '../components/Layout'
+import Header from '../components/Header'
 
 function CreateMoim() {
   return (
-    <PageContainer>모임 생성 페이지 입니다.</PageContainer>
+    <>
+      <Header></Header>
+      <PageContainer>
+      </PageContainer>
+    </>
   )
 }
 
