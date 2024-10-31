@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../components/Layout';
 import LoginCircle from '../assets/images/LoginCircle.png';
 import KakaoLogo from '../assets/images/KakaoLogin.png';
+import axios from 'axios';
 
 const LoginContainer = styled(PageContainer)`
   display: flex;
@@ -44,29 +45,21 @@ function Login() {
 
   const getToken = async (authCode, provider) => {
     try {
-      const response = await fetch(`http://mood9.shop/api/${provider}/token`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          code: authCode,
-        }),
+      const response = await axios.post(`https://mood9.shop/api/${provider}/token`, {
+        code: authCode,
       });
-
-      const data = await response.json();
       
-      if (response.ok) {
-        localStorage.setItem('accessToken', data.accessToken);
+      console.log('서버 응답:', response.data);
+      
+      if (response.status === 200) {
+        localStorage.setItem('accessToken', response.data.data.accessToken);
         navigate('/home');
-      } else {
-        console.error('로그인 오류:', {
-          statusCode: data.statusCode,
-          message: data.message
-        });
       }
     } catch (error) {
-      console.error('로그인 중 오류 발생:', error);
+      console.error('에러 상태 코드:', error.response?.status);
+      console.error('에러 데이터:', error.response?.data);
+      console.error('에러 헤더:', error.response?.headers);
+      console.error('전체 에러 객체:', error);
     }
   };
 
