@@ -10,7 +10,7 @@ import Splash from '../../pages/Splash';
 
 export const routes = [
     {path: '/' , element: <Splash/>},
-    { path: '/home', element: <Home /> },
+    {path: '/home', element: <Home /> },
     {path: '/createmoim' , element: <CreateMoim/>},
     {path: '/topicresult' , element: <TopicResult/>},
     {path: '/topicdetail' , element: <TopicDetail />},
