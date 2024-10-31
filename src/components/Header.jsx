@@ -10,22 +10,28 @@ const HeaderContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     `
+const LogoContainer = styled.div   `
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
 const LogoImg = styled.img`
     width: 25%;
-    justify-content: center;
-    align-items: center;
 `
 const BackArrowImg = styled.img`
-    width: 7%;
-    
+    width: 5%;
 `
 function Header() {
   return (
     <>
         <HeaderContainer>
             <BackArrowImg src={BackArrow} />
-            <LogoImg src={Logo}/>
+            <LogoContainer>
+                <LogoImg src={Logo}/>
+            </LogoContainer>
         </HeaderContainer>
     </>
   )
