@@ -6,6 +6,7 @@ import TopicResult from '../../pages/TopicResult';
 import TopicDetail from '../../pages/TopicDetail';
 import Review from '../../pages/Review';
 import Splash from '../../pages/Splash';
+import Login from '../../pages/Login';
 
 
 export const routes = [
@@ -14,7 +15,8 @@ export const routes = [
     {path: '/createmoim' , element: <CreateMoim/>},
     {path: '/topicresult' , element: <TopicResult/>},
     {path: '/topicdetail' , element: <TopicDetail />},
-    {path: '/review' , element: <Review/>}
+    {path: '/review' , element: <Review/>},
+    {path: '/login', element: <Login />}
 
 ]
 
