@@ -7,6 +7,7 @@ import TopicDetail from '../../pages/TopicDetail';
 import Review from '../../pages/Review';
 import Splash from '../../pages/Splash';
 import Login from '../../pages/Login';
+import ReviewWrite from '../../components/Review/ReviewWrite';
 
 
 export const routes = [
@@ -16,7 +17,8 @@ export const routes = [
     {path: '/topicresult' , element: <TopicResult/>},
     {path: '/topicdetail' , element: <TopicDetail />},
     {path: '/review' , element: <Review/>},
-    {path: '/login', element: <Login />}
+    {path: '/login', element: <Login />},
+    {path: '/review/write', element: <ReviewWrite />}
 
 ]
 
