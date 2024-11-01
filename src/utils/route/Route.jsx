@@ -8,6 +8,7 @@ import Review from "../../pages/Review";
 import Splash from "../../pages/Splash";
 import HotTopic from "../../pages/HotTopic";
 import RecentMoim from "../../pages/RecentMoim";
+import PastMoim from "../../pages/PastMoim";
 
 export const routes = [
   { path: "/", element: <Splash /> },
@@ -18,6 +19,7 @@ export const routes = [
   { path: "/topicdetail", element: <TopicDetail /> },
   { path: "/hottopic", element: <HotTopic /> },
   { path: "/review", element: <Review /> },
+  { path: "/pastmoim/:id", element: <PastMoim /> },
 ];
 
 const RouteSetting = () => (
