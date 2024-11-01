@@ -9,6 +9,7 @@ import Splash from "../../pages/Splash";
 import HotTopic from "../../pages/HotTopic";
 import RecentMoim from "../../pages/RecentMoim";
 import PastMoim from "../../pages/PastMoim";
+import Login from "../../pages/Login";
 
 export const routes = [
   { path: "/", element: <Splash /> },
