@@ -1,16 +1,17 @@
 import instance from "./instance";
 
-export const makeMoim = async ({host,relationshipType,peopleCount,vibe,averageAge,commonInterests}) => {
+
+export const makeMoim = async ({host, relationshipType, peopleCount, vibe, averageAge, commonInterests}) => {
+    const selectedInfo = {
+        host,
+        relationshipType,
+        peopleCount,
+        vibe,
+        averageAge,
+        commonInterests
+    };
     try {
-        data
-        const response = await instance.post('/api/gathering', {
-            host: host,
-            relationshipType: relationshipType,
-            peopleCount: peopleCount,
-            vibe: vibe,
-            averageAge: averageAge,
-            commonInterests: commonInterests
-        })
+        const response = await instance.post('/api/gatherings', selectedInfo)
         return response.data
     }
     catch (error){
