@@ -48,9 +48,9 @@ const Splash = () => {
             if(checkUser()){
                 navigate('/home');
             } else{
-                navigate('/home'); //나중에 login으로 이동
+                navigate('/login'); //나중에 login으로 이동
             }
-            }, 10000);
+            }, 2000);
 
             return () => clearTimeout(timer);
       }, [navigate]);
