@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { PageContainer } from '../components/Layout'
 import Header from '../components/Header'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 const Question = styled.div`
   font-size: 14px;
@@ -53,11 +54,11 @@ const GoButton = styled.button`
   border-radius: 8px;
   font-size: 16px;
   font-family:  ${({ theme }) => theme.fonts.extrabold};
-
+  cursor: pointer;
 `
 const CreateMoim = ()  => {
   const [selectedInfo, setSelectedInfo] = useState([]);
-  const [filtered, setFiltered] = useState([])
+  const navigate = useNavigate();
 
   const question = [
     '누구와 만나는 자리인가요?',
@@ -73,26 +74,33 @@ const CreateMoim = ()  => {
     peopleCount : ['2명', '5명 이하', '10명 이하', '10명 이상'],
     vibe : ['차분한', '보통', '활발한'],
     averageAge :['10대', '20대', '30대', '40대'],
-    commonInterests : ['🎬 영화', '️🏸 스포츠', '🏋🏻‍♂️ 헬스', '🫕 요리', '📚 독서', '💻 개발', '💊 ️건강', '🎧 음악', '🧩 게임']
+    commonInterests : ['🎬 영화', '️🏸 스포츠', '🏋🏻‍♂️ 헬스', '🫕 요리', '📚 독서', '💻 개발', ' ️건강', '🎧 음악', '🧩 게임']
   };
 
-  //const handleSelectedInfo = (optionCategory, answer) => {
-    // console.log(optionCategory);
-    // console.log(answer);
-  //  setSelectedInfo(prevState => ({
-  //  ...prevState,
-  //  [optionCategory]: answer
-//}))
- // };
-
   const handleMoimInfo = (moimInfo, content) => {
-
+    
     setSelectedInfo(prevState=> ({
       ...prevState,
       [moimInfo]: content
     }))
-    
+    // console.log(selectedInfo);
+
   };
+
+  const handleMakeMoim = (selectedInfo) => {
+    // console.log(selectedInfo);
+    
+    navigate('/topicresult', {
+      state:{
+        host: `${selectedInfo.host}`,
+        relationshipType: `${selectedInfo.relationshipType}`,
+        peopleCount: `${selectedInfo.peopleCount}`,
+        vibe: `${selectedInfo.vibe}`,
+        averageAge: `${selectedInfo.averageAge}`,
+        commonInterests: `${selectedInfo.commonInterests}`
+      }
+    })
+  }
 
   return (
     <>
@@ -119,7 +127,7 @@ const CreateMoim = ()  => {
             ))}
       </PageContainer>
       <GoContainer>
-            <GoButton>
+            <GoButton onClick={()=>handleMakeMoim(selectedInfo)}>
               MOOD 구하러 가기 🔥
             </GoButton>
         </GoContainer> 
