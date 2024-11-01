@@ -48,13 +48,13 @@ const GoContainer = styled.div`
 const GoButton = styled.button`
   width: 80%;
   height: 45px;
-  background-color: #000;
+  background-color: ${({ disabled, theme}) => (disabled ? '#ccc' : '#000')};
   color: #fff;
   border: none;
   border-radius: 8px;
   font-size: 16px;
   font-family:  ${({ theme }) => theme.fonts.extrabold};
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `
 const CreateMoim = ()  => {
   const [selectedInfo, setSelectedInfo] = useState([]);
@@ -88,7 +88,7 @@ const CreateMoim = ()  => {
   };
 
   const handleMakeMoim = (selectedInfo) => {
-    // console.log(selectedInfo);
+    console.log(selectedInfo);
     
     navigate('/topicresult', {
       state:{
@@ -101,18 +101,24 @@ const CreateMoim = ()  => {
       }
     })
   }
+  const isDisabled =  
+    !selectedInfo.host || 
+    !selectedInfo.relationshipType || 
+    !selectedInfo.peopleCount|| 
+    !selectedInfo.vibe || 
+    !selectedInfo.averageAge || 
+    !selectedInfo.commonInterests
 
   return (
     <>
       <Header />
       <PageContainer>
         {Object.keys(moimOption).map((option, index) => (
-          <>
+          <React.Fragment key={option}>
           <Question>{question[index]}</Question>
-            <ButtonContainer>
+            <ButtonContainer >
               {moimOption[option].map((info)=> (                
-                  <Option
-                    key={info}
+                  <Option key={info}
                     onClick={()=> handleMoimInfo(option, info)}
                     style={{
                       backgroundColor: selectedInfo[option] === info ? '#A5E5FF' : '#F2F2F2',
@@ -123,13 +129,15 @@ const CreateMoim = ()  => {
                 ))}
               </ButtonContainer>
               <Divider />
-              </>
+              </React.Fragment>
             ))}
       </PageContainer>
       <GoContainer>
-            <GoButton onClick={()=>handleMakeMoim(selectedInfo)}>
-              MOOD 구하러 가기 🔥
-            </GoButton>
+            <GoButton 
+              disabled={isDisabled} 
+              onClick={()=>handleMakeMoim(selectedInfo)}>
+                {isDisabled ? '정보를 모두 선택해주세요 🙌🏻' : 'MOOD 구하러 가기 🔥'}
+  </GoButton>
         </GoContainer> 
     </>
   );
