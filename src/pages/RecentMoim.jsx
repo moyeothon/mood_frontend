@@ -42,6 +42,21 @@ const MeetingLi = styled.div`
   cursor: pointer;
 `;
 
+const NoMeetingsMessage = styled.div`
+  width: 91%;
+  min-height: 60px;
+  margin-left: 1%;
+  margin-bottom: 3%;
+  padding: 10px;
+  border: 1px solid #c7c6c6;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
 const UserNameDiv = styled.div`
   text-align: center;
   margin-top: 14%;
@@ -98,7 +113,7 @@ function RecentMoim() {
 
   useEffect(() => {
     const fetchMeetings = async () => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("accessToken");
 
       try {
         const response = await axios.get(
@@ -124,6 +139,8 @@ function RecentMoim() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
+  const totalMeetings = 5; // 항상 5개의 항목 표시
+
   return (
     <>
       <HeaderContainer>
@@ -141,23 +158,32 @@ function RecentMoim() {
             <h3>최근 모임</h3>
           </RecentMoimRecentPhrase>
           <MeetingUL>
-            {meetings.map((meeting) => {
-              const formattedDate = new Date(meeting.createdAt)
-                .toLocaleDateString("ko-KR", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                })
-                .replace(/\. /g, ".") // 형식을 "YYYY.MM.DD"로 맞춤
-                .replace(/\.$/, ""); // 마지막에 붙는 점 제거
-              return (
-                <MeetingLi
-                  key={meeting.gatheringId}
-                  onClick={() => handleMeetingClick(meeting.gatheringId)}
-                >
-                  {formattedDate}에 주최한 모임 - 주최자: {meeting.host}
-                </MeetingLi>
-              );
+            {Array.from({ length: totalMeetings }, (_, index) => {
+              if (index < meetings.length) {
+                const meeting = meetings[index];
+                const formattedDate = new Date(meeting.createdAt)
+                  .toLocaleDateString("ko-KR", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  })
+                  .replace(/\. /g, ".")
+                  .replace(/\.$/, "");
+                return (
+                  <MeetingLi
+                    key={meeting.gatheringId}
+                    onClick={() => handleMeetingClick(meeting.gatheringId)}
+                  >
+                    {formattedDate}에 주최한 모임 - 주최자: {meeting.host}
+                  </MeetingLi>
+                );
+              } else {
+                return (
+                  <NoMeetingsMessage key={index}>
+                    모임이 없습니다.
+                  </NoMeetingsMessage>
+                );
+              }
             })}
           </MeetingUL>
         </div>

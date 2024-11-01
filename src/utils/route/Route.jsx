@@ -14,6 +14,7 @@ import Login from "../../pages/Login";
 export const routes = [
   { path: "/", element: <Splash /> },
   { path: "/home", element: <Home /> },
+  { path: "/login", element: <Login /> },
   { path: "/createmoim", element: <CreateMoim /> },
   { path: "/recentmoim", element: <RecentMoim /> },
   { path: "/topicresult", element: <TopicResult /> },
