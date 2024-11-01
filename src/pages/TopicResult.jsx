@@ -39,6 +39,7 @@ const ContentContainer = styled.div`
     align-items: center;
     justify-content: space-between; //수정
     margin: 10px 0px;
+    cursor: pointer;
 `
 
 const SubTitle = styled.div`
@@ -127,88 +128,101 @@ function TopicResult() {
     const handleNewTopic = () => {
       makeTopic();
     }
-  
-  // 더미데이터
-  // const topicData = {
-  //   "conversationTopicInfoResDtos": [
-  //     {
-  //       "topic": "음악을 통해 발견한 새로운 취미",
-  //       "description": "참석자들이 음악과 관련하여 새로운 취미를 어떻게 시작하게 되었는지를 공유합니다. 예를 들어, 기타를 배우거나 DJing에 도전한 경험 등을 나누면 분위기가 활발해질 수 있습니다."
-  //     },
-  //     {
-  //       "topic": "살면서 가장 감명 깊었던 콘서트 경험",
-  //       "description": "각자가 가장 기억에 남는 콘서트나 라이브 공연의 순간을 공유합니다. 이는 특별한 추억을 나누고 서로 더 가까워질 수 있는 기회를 제공합니다."
-  //     },
-  //     {
-  //       "topic": "자신의 인생에서 '사운드트랙'이 된 노래",
-  //       "description": "각자의 삶의 중요한 순간에 배경이 되었던 노래들을 이야기합니다. 이 주제는 서로의 이야기를 통해 공통점을 발견하고 연결 고리를 만들 수 있습니다."
-  //     }
-  //   ]
-  // }
 
-  return (
-    <>
-    {isLoading ? (
-      <Loading/>
-    ) : (
-    <>
-      <Header />
-      <PageContainer>
-        <Title>
-          무드가 여러분들을 위한 결과를 가져왔어요 🧊
-        </Title>
-        <Container>
+    const handleTopicClick = (topic, description) => {
+      navigate('/topicdetail', {
+        state: {
+          title: topic,
+          description: description
+        }
+      });
+    };
+
+    // 더미데이터
+    // const topicData = {
+    //   "conversationTopicInfoResDtos": [
+    //     {
+    //       "topic": "음악을 통해 발견한 새로운 취미",
+    //       "description": "참석자들이 음악과 관련하여 새로운 취미를 어떻게 시작하게 되었는지를 공유합니다. 예를 들어, 기타를 배우거나 DJing에 도전한 경험 등을 나누면 분위기가 활발해질 수 있습니다."
+    //     },
+    //     {
+    //       "topic": "살면서 가장 감명 깊었던 콘서트 경험",
+    //       "description": "각자가 가장 기억에 남는 콘서트나 라이브 공연의 순간을 공유합니다. 이는 특별한 추억을 나누고 서로 더 가까워질 수 있는 기회를 제공합니다."
+    //     },
+    //     {
+    //       "topic": "자신의 인생에서 '사운드트랙'이 된 노래",
+    //       "description": "각자의 삶의 중요한 순간에 배경이 되었던 노래들을 이야기합니다. 이 주제는 서로의 이야기를 통해 공통점을 발견하고 연결 고리를 만들 수 있습니다."
+    //     }
+    //   ]
+    // }
+
+    return (
+      <>
+      {isLoading ? (
+        <Loading/>
+      ) : (
+      <>
+        <Header />
+        <PageContainer>
+          <Title>
+            무드가 여러분들을 위한 결과를 가져왔어요 🧊
+          </Title>
+          <Container>
+
+            <SubTitle>
+              무드의 추천 대화 주제
+            </SubTitle>
+            {topicData && topicData.conversationTopicInfoResDtos.map((item, index) => {
+              return (
+                <div key={item.topic}>
+                  <ContentContainer 
+                    onClick={() => handleTopicClick(item.topic, item.description)}
+                  >
+                    <RankImg src={ImgNumber[index]} />
+                    <Topic>{item.topic}</Topic>
+                    <ArrowImg src={ForwardArrow} />
+                  </ContentContainer>
+                  <Divider />
+                </div>
+              )
+            })}
+          </Container>
+
+          <Container>
 
           <SubTitle>
-            무드의 추천 대화 주제
+            무드의 추천 활동
           </SubTitle>
-          {topicData && topicData.conversationTopicInfoResDtos.map((item, index) => {
+          {activitydata && activitydata.suggestedActivityInfoResDtos.map((item, index) => {
             return (
-              <div key={item.topic}>
-                <ContentContainer>
+              <React.Fragment key={item.activity}>
+                <ContentContainer 
+                  onClick={() => handleTopicClick(item.activity, item.description)}
+                >
                   <RankImg src={ImgNumber[index]} />
-                  <Topic>{item.topic}</Topic>
+                  <Topic>{item.activity}</Topic>
                   <ArrowImg src={ForwardArrow} />
                 </ContentContainer>
                 <Divider />
-              </div>
+              </React.Fragment>
             )
           })}
-        </Container>
+          </Container>
+                <GoContainer>
+            <GoButton onClick={()=>handleNewTopic()}>
+              다른 주제 추천 받기 🥶
+            </GoButton>
+            <GoButton onClick={()=>handleBackToMoimInfo()}>
+              모임 정보 다시 입력하기 
+            </GoButton>
+          </GoContainer> 
 
-        <Container>
+        </PageContainer>
 
-        <SubTitle>
-          무드의 추천 활동
-        </SubTitle>
-        {activitydata && activitydata.suggestedActivityInfoResDtos.map((item, index) => {
-          return (
-            <>
-              <ContentContainer>
-                <RankImg src={ImgNumber[index]} />
-                <Topic>{item.activity}</Topic>
-                <ArrowImg src={ForwardArrow} />
-              </ContentContainer>
-              <Divider />
-            </>
-          )
-        })}
-        </Container>
-              <GoContainer>
-          <GoButton onClick={()=>handleNewTopic()}>
-            다른 주제 추천 받기 🥶
-          </GoButton>
-          <GoButton onClick={()=>handleBackToMoimInfo()}>
-            모임 정보 다시 입력하기 
-          </GoButton>
-        </GoContainer> 
-
-      </PageContainer>
-
+      </>
+    )}
     </>
-  )}
-  </>
-  );
-}
+    );
+  }
 
-export default TopicResult;
+  export default TopicResult;
