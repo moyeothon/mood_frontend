@@ -159,16 +159,15 @@ const SmallHotTopicPhraseDiv = styled.div`
   top: 25%;
 `;
 const DarkOverlay = styled.div`
-  position: fixed; // 화면에 고정
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
   background-color: rgba(0, 0, 0, 0.7); // 어두운 배경 색상 (투명도 0.7)
   z-index: 1000; // 가장 위에 나타나도록 설정
   span {
     position: absolute;
-    top: 67%;
+    top: 66%;
     left: 35%;
     color: white;
   }
@@ -188,10 +187,10 @@ function Tutorial3() {
 
   return (
     <>
-      <DarkOverlay>
-        <span>이제 시작해봅시다!</span>
-      </DarkOverlay>
       <HomeContainer>
+        <DarkOverlay>
+          <span>이제 시작해봅시다!</span>
+        </DarkOverlay>
         <SpeechBalloons1Img src={Home_SpeechBalloons} alt="홈_배경_말풍선" />
         <SpeechBalloons2Img src={Home_SpeechBalloons} alt="홈_배경_말풍선" />
 
