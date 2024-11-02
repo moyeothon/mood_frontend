@@ -10,7 +10,7 @@ export const makeMoim = async ({host, relationshipType, peopleCount, vibe, avera
         averageAge,
         commonInterests
     };
-    try {
+    try {        
         const response = await instance.post('/api/gatherings', selectedInfo)
         return response.data
     }
