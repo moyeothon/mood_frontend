@@ -8,7 +8,6 @@ import Second from "../assets/images/2.png";
 import Third from "../assets/images/3.png";
 import { useParams } from "react-router-dom";
 import { getMoim } from "../api/makeMoim"; // 새로운 GET 요청 함수
-import Loading from "../components/Loading";
 
 const Title = styled.div`
   font-size: 16px;
@@ -16,16 +15,20 @@ const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 0px 30px 0px;
+  margin: 100px 0px 30px 0px;
 `;
 
+const ContainerContainer = styled.div`
+  position: absolute;
+  top: 130%;
+`;
 const Container = styled.div`
-  width: 86%;
+  width: 110%;
   height: 50%;
   padding: 19px 23px;
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
+  margin-bottom: 40px;
 `;
 
 const Divider = styled.div`
@@ -82,8 +85,14 @@ function PastMoim() {
     try {
       const response = await getMoim(id); // GET 요청으로 모임 데이터 가져오기
       if (response) {
-        setTopicData(response.data.conversationTopicInfoResDtos);
-        setActivityData(response.data.suggestedActivityInfoResDtos);
+        setTopicData(
+          response.data.conversationTopicInfoResDtos
+            .conversationTopicInfoResDtos
+        );
+        setActivityData(
+          response.data.suggestedActivityInfoResDtos
+            .suggestedActivityInfoResDtos
+        );
       }
     } catch (error) {
       console.error("Failed to fetch data:", error);
@@ -96,49 +105,45 @@ function PastMoim() {
   }, []);
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <Header />
-          <PageContainer>
-            <Title>무드가 여러분들을 위한 결과를 가져왔어요 🧊</Title>
-            <Container>
-              <SubTitle>무드의 추천 대화 주제</SubTitle>
-              {topicData &&
-                topicData.map((item, index) => {
-                  return (
-                    <div key={item.topic}>
-                      <ContentContainer>
-                        <RankImg src={ImgNumber[index]} />
-                        <Topic>{item.topic}</Topic>
-                        <ArrowImg src={ForwardArrow} />
-                      </ContentContainer>
-                      <Divider />
-                    </div>
-                  );
-                })}
-            </Container>
+      <Header />
+      <PageContainer>
+        <Title>무드가 여러분들을의 소중한 추억을 가져왔어요</Title>
+        <ContainerContainer>
+          <Container>
+            <SubTitle>무드의 추천 대화 주제</SubTitle>
+            {topicData &&
+              topicData.map((item, index) => {
+                return (
+                  <div key={item.topic}>
+                    <ContentContainer>
+                      <RankImg src={ImgNumber[index]} />
+                      <Topic>{item.topic}</Topic>
+                      <ArrowImg src={ForwardArrow} />
+                    </ContentContainer>
+                    <Divider />
+                  </div>
+                );
+              })}
+          </Container>
 
-            <Container>
-              <SubTitle>무드의 추천 활동</SubTitle>
-              {activityData &&
-                activityData.map((item, index) => {
-                  return (
-                    <div key={item.activity}>
-                      <ContentContainer>
-                        <RankImg src={ImgNumber[index]} />
-                        <Topic>{item.activity}</Topic>
-                        <ArrowImg src={ForwardArrow} />
-                      </ContentContainer>
-                      <Divider />
-                    </div>
-                  );
-                })}
-            </Container>
-          </PageContainer>
-        </>
-      )}
+          <Container>
+            <SubTitle>무드의 추천 활동</SubTitle>
+            {activityData &&
+              activityData.map((item, index) => {
+                return (
+                  <div key={item.activity}>
+                    <ContentContainer>
+                      <RankImg src={ImgNumber[index]} />
+                      <Topic>{item.activity}</Topic>
+                      <ArrowImg src={ForwardArrow} />
+                    </ContentContainer>
+                    <Divider />
+                  </div>
+                );
+              })}
+          </Container>
+        </ContainerContainer>
+      </PageContainer>
     </>
   );
 }
