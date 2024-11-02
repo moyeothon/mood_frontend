@@ -4,6 +4,7 @@ import BackArrow from "../assets/images/BackArrow.png";
 import styled from "styled-components";
 import { PageContainer } from "../components/Layout";
 import { useNavigate } from "react-router-dom";
+import Human from '../assets/images/human.png';
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -23,7 +24,7 @@ const BackArrowImg = styled.img`
 const MeetingUL = styled.ul`
   list-style: none;
   padding: 0;
-  margin-top: 40%;
+  margin-top: 80%;
 `;
 
 const MeetingLi = styled.div`
@@ -39,6 +40,7 @@ const MeetingLi = styled.div`
   align-items: center;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
   cursor: pointer;
 `;
 
@@ -58,8 +60,10 @@ const NoMeetingsMessage = styled.div`
 `;
 
 const UserNameDiv = styled.div`
-  text-align: center;
-  margin-top: 14%;
+  text-align: start;
+  position: absolute;
+  top: 10%;
+  left: 10%;
   span {
     color: #a5e5ff;
   }
@@ -67,22 +71,23 @@ const UserNameDiv = styled.div`
 
 const RecentMoimCatchPhrase = styled.div`
   position: absolute;
+  text-align: start;
   line-height: 1.5;
-  top: 11%;
-  left: 22%;
-  width: 120%;
+  top: 14%;
+  left: 10%;
+
 `;
 
 const RecentMoimRecentPhrase = styled.div`
   position: absolute;
-  top: 25%;
+  top: 30%;
   font-weight: 900;
   left: 8%;
 `;
 
 const RecentToHomeDiv = styled.div`
   position: absolute;
-  bottom: -7%;
+  bottom: -2%;
   left: 15%;
   width: 70%;
   font-weight: 900;
@@ -96,6 +101,19 @@ const RecentToHomeDiv = styled.div`
   align-items: center;
   cursor: pointer;
 `;
+
+const HomanImg = styled.img`
+  width: 50%;
+  background-image: url(Human);
+  background-size: contain;
+  background-position-x: right;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 10%;
+  z-index: -2;
+  right: -7%;
+
+`
 
 function RecentMoim() {
   const [meetings, setMeetings] = useState([]);
@@ -151,9 +169,7 @@ function RecentMoim() {
       <HeaderContainer>
         <BackArrowImg src={BackArrow} onClick={handleBackArrowClick} />
       </HeaderContainer>
-      <PageContainer>
-        <div>
-          <UserNameDiv>
+      <UserNameDiv>
             <h2>
               <span id="UserName">{myNickname}</span>님
             </h2>
@@ -161,9 +177,16 @@ function RecentMoim() {
           <RecentMoimCatchPhrase>
             <p>당신의 모임은 언제나 특별해요!</p>
           </RecentMoimCatchPhrase>
+
+      <PageContainer style={{  overflow: 'hidden'}}>
+      <HomanImg src={Human}/>
+        <div>
+          
+
           <RecentMoimRecentPhrase>
             <h3>최근 모임</h3>
           </RecentMoimRecentPhrase>
+          
           <MeetingUL>
             {Array.from({ length: totalMeetings }, (_, index) => {
               if (index < meetings.length) {
@@ -193,9 +216,10 @@ function RecentMoim() {
               }
             })}
           </MeetingUL>
-          <RecentToHomeDiv onClick={handleButtonClick}>홈으로</RecentToHomeDiv>
         </div>
+        <RecentToHomeDiv onClick={handleButtonClick}>홈으로</RecentToHomeDiv>
       </PageContainer>
+
     </>
   );
 }

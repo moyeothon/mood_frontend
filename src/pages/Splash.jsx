@@ -49,7 +49,7 @@ const Splash = () => {
       if (checkUser()) {
         navigate("/home");
       } else {
-        navigate("/login"); //나중에 login으로 이동
+        navigate("/login");
       }
     }, 2000);
 
