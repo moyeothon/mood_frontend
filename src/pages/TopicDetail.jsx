@@ -40,7 +40,6 @@ const DescriptionBox = styled.div`
   left: 50%;
   transform: translateX(-50%);
 `
-
 const Description = styled.div`
   font-size: 16px;
   line-height: 1.6;
@@ -54,7 +53,7 @@ function TopicDetail() {
 
   return (
     <>
-      <Header />
+      <Header where='/topicresult' />
       <PageContainer>
         <DetailCardWrapper>
           <TopicTitle>{title}</TopicTitle>

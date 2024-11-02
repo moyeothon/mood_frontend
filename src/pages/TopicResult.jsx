@@ -102,6 +102,7 @@ function TopicResult() {
   const navigate = useNavigate();
   const moimInfo = { ...location.state };
   const [isLoading, setIsLoading] = useState(true);
+  // const [shouldFetch, setShouldFetch] = useState(true);
 
   const ImgNumber = [First, Second, Third];
 
@@ -149,8 +150,10 @@ function TopicResult() {
 
   //마운트 시 모임 생성 api 호출
   useEffect(() => {
-    makeTopic();
-  }, [])
+    if(location.state?.fromCreateMoim) {
+      makeTopic();
+    }
+  }, [location.state])
 
   //모임 정보 다시 입력하기
   const handleBackToMoimInfo = () => {

@@ -97,7 +97,8 @@ const CreateMoim = ()  => {
         peopleCount: `${selectedInfo.peopleCount}`,
         vibe: `${selectedInfo.vibe}`,
         averageAge: `${selectedInfo.averageAge}`,
-        commonInterests: `${selectedInfo.commonInterests}`
+        commonInterests: `${selectedInfo.commonInterests}`,
+        fromCreateMoim: true
       }
     })
   }
