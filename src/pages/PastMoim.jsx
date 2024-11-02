@@ -59,7 +59,7 @@ const SubTitle = styled.div`
 const Topic = styled.div`
   width: 85%;
   margin: 0px 5px;
-  font-size: 15px;
+  font-size: 1rem;
   flex-wrap: wrap;
   line-height: 1.5;
 `;
@@ -118,7 +118,6 @@ function PastMoim() {
                     <ContentContainer>
                       <RankImg src={ImgNumber[index]} />
                       <Topic>{item.topic}</Topic>
-                      <ArrowImg src={ForwardArrow} />
                     </ContentContainer>
                     <Divider />
                   </div>
@@ -135,7 +134,6 @@ function PastMoim() {
                     <ContentContainer>
                       <RankImg src={ImgNumber[index]} />
                       <Topic>{item.activity}</Topic>
-                      <ArrowImg src={ForwardArrow} />
                     </ContentContainer>
                     <Divider />
                   </div>
