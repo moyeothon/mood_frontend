@@ -1,3 +1,5 @@
+![logo.png]('![image](https://github.com/user-attachments/assets/7e1bc821-f93a-4dfb-9b4c-0e753608d690)')
+
 ## 🌟 **프로젝트 이름**  
 > **"분위기 메이커? AI가 알아서 척척!"**  
 **AI 기반 아이스브레이킹**을 통해 어떤 모임도 어색하지 않게!  
