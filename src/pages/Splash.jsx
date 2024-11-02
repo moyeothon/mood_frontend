@@ -52,7 +52,7 @@ const Splash = () => {
       } else {
         navigate("/login"); //나중에 login으로 이동
       }
-    }, 10000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
