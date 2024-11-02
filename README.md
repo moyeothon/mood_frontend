@@ -1,4 +1,5 @@
-![logo.png]('![image](https://github.com/user-attachments/assets/7e1bc821-f93a-4dfb-9b4c-0e753608d690)')
+![image](https://github.com/user-attachments/assets/30909f97-1c15-467d-a458-62e99a6d6ded)
+
 
 ## 🌟 **프로젝트 이름**  
 > **"분위기 메이커? AI가 알아서 척척!"**  
