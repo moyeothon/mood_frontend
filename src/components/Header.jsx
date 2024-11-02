@@ -41,6 +41,10 @@ function Header({ where }) {
         }
     };
 
+    const handleClickLogo = () => {
+        navigate('/home');
+    }
+
     return (
         <>
             <HeaderContainer>
@@ -49,7 +53,7 @@ function Header({ where }) {
                     onClick={handleBackClick}
                 />
                 <LogoContainer>
-                    <LogoImg src={Logo}/>
+                    <LogoImg src={Logo} onClick={handleClickLogo}/>
                 </LogoContainer>
             </HeaderContainer>
         </>

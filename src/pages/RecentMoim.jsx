@@ -193,8 +193,8 @@ function RecentMoim() {
               }
             })}
           </MeetingUL>
+          <RecentToHomeDiv onClick={handleButtonClick}>홈으로</RecentToHomeDiv>
         </div>
-        <RecentToHomeDiv onClick={handleButtonClick}>홈으로</RecentToHomeDiv>
       </PageContainer>
     </>
   );
