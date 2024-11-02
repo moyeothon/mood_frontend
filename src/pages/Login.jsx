@@ -30,7 +30,7 @@ function Login() {
 
   const kakaoLogin = () => {
     localStorage.setItem("provider", "kakao");
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=c88d155ce18616f58d5b8694aafec094&redirect_uri=http://localhost:3000/login`;
+    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}`;
   };
 
   React.useEffect(() => {
@@ -46,7 +46,7 @@ function Login() {
   const getToken = async (authCode, provider) => {
     try {
       const response = await axios.post(
-        `https://mood9.shop/api/${provider}/token`,
+        `${process.env.REACT_APP_API_BASE_URL}/api/${provider}/token`,
         {
           code: authCode,
         }
