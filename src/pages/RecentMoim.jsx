@@ -122,7 +122,7 @@ function RecentMoim() {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-            params: { limit: 5 },
+            params: { limit: 5, sort: "desc" },
           }
         );
         setMeetings(response.data.data.gatherings);
@@ -161,20 +161,21 @@ function RecentMoim() {
             {Array.from({ length: totalMeetings }, (_, index) => {
               if (index < meetings.length) {
                 const meeting = meetings[index];
-                const formattedDate = new Date(meeting.createdAt)
-                  .toLocaleDateString("ko-KR", {
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit",
-                  })
-                  .replace(/\. /g, ".")
-                  .replace(/\.$/, "");
+                // 올바른 날짜 형식으로 변환
+                const formattedDate = new Date(
+                  meeting.createdAt
+                ).toLocaleDateString("ko-KR", {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                });
+
                 return (
                   <MeetingLi
                     key={meeting.gatheringId}
                     onClick={() => handleMeetingClick(meeting.gatheringId)}
                   >
-                    {formattedDate}에 주최한 모임 - 주최자: {meeting.host}
+                    {formattedDate}에 주최한 모임
                   </MeetingLi>
                 );
               } else {

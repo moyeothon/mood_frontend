@@ -18,10 +18,9 @@ const SplashContainer = styled.div`
   margin-bottom: 60px;
 `;
 const SplashWrapper = styled.div`
-  display: {
-    ishidden? 'none' : "block";
-  }
+  display: ${({ isHidden }) => (isHidden ? "none" : "block")};
 `;
+
 const SubTitle = styled.div`
   color: #000;
   font-size: 20px;

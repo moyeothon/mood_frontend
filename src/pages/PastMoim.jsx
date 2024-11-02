@@ -1,149 +1,63 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import BackArrow from "../assets/images/BackArrow.png";
-import styled from "styled-components";
-import { PageContainer } from "../components/Layout";
-import { useNavigate, useParams } from "react-router-dom";
-import Loading from "../components/Loading";
+import React, { useEffect, useState } from "react";
+import { makePastMoim } from "../api/makeMoim";
 
-const HeaderContainer = styled.div`
-  width: 100%;
-  height: 62px;
-  box-shadow: 0px 0px 6px rgb(0, 0, 0, 0.12);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
+function PastMoim({ id }) {
+  const [topicData, setTopicData] = useState([]);
+  const [activityData, setActivityData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null); // Error 상태 추가
 
-const BackArrowImg = styled.img`
-  width: 5%;
-  margin-left: 5%;
-  cursor: pointer;
-`;
-
-const Title = styled.div`
-  font-size: 16px;
-  font-family: ${({ theme }) => theme.fonts.bold};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0px 30px 0px;
-`;
-
-const Container = styled.div`
-  width: 86%;
-  padding: 19px 23px;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-`;
-
-const MeetingUL = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-`;
-
-const MeetingLi = styled.div`
-  width: 100%;
-  min-height: 60px;
-  margin-bottom: 3%;
-  padding: 10px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  border: 1px solid #c7c6c6;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-`;
-
-const NoMeetingsMessage = styled.div`
-  width: 100%;
-  min-height: 60px;
-  margin-bottom: 3%;
-  padding: 10px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
-
-const UserNameDiv = styled.div`
-  text-align: center;
-  margin-top: 14%;
-`;
-
-function PastMoim() {
-  const [meetings, setMeetings] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const { id } = useParams();
-
-  const handleBackArrowClick = () => {
-    navigate("/recentmoim");
+  const fetchPastMoimData = async () => {
+    setIsLoading(true);
+    setError(null); // Reset error state on new fetch
+    try {
+      const data = await makePastMoim(id);
+      setTopicData(
+        data.conversationTopicInfoResDtos.conversationTopicInfoResDtos || []
+      ); // 기본값 설정
+      setActivityData(
+        data.suggestedActivityInfoResDtos.suggestedActivityInfoResDtos || []
+      ); // 기본값 설정
+    } catch (error) {
+      console.error("Error fetching past meeting data:", error);
+      setError("과거 모임 데이터를 가져오는 중 오류가 발생했습니다."); // 에러 메시지 설정
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
-    const fetchPastMeetings = async () => {
-      const token = localStorage.getItem("accessToken");
-
-      try {
-        const response = await axios.get(
-          `https://mood9.shop/api/gatherings/${id}/past`, // 필요한 경우 엔드포인트 조정
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setMeetings(response.data.data.gatherings || []); // 응답 구조에 따라 조정
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPastMeetings();
+    fetchPastMoimData();
   }, [id]);
 
-  if (loading) return <Loading />;
-  if (error) return <div>오류: {error.message}</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>; // 에러 메시지 표시
 
   return (
-    <>
-      <HeaderContainer>
-        <BackArrowImg src={BackArrow} onClick={handleBackArrowClick} />
-      </HeaderContainer>
-      <PageContainer>
-        <Title>과거 모임</Title>
-        <Container>
-          <UserNameDiv>
-            <h2>구해줘_내_성대님</h2>
-          </UserNameDiv>
-          <MeetingUL>
-            {meetings.length > 0 ? (
-              meetings.map((meeting) => (
-                <MeetingLi key={meeting.gatheringId}>
-                  {meeting.date}에 주최한 모임 - 주최자: {meeting.host}
-                </MeetingLi>
-              ))
-            ) : (
-              <NoMeetingsMessage>모임이 없습니다.</NoMeetingsMessage>
-            )}
-          </MeetingUL>
-        </Container>
-      </PageContainer>
-    </>
+    <div>
+      <h2>Conversation Topics</h2>
+      {topicData.length > 0 ? (
+        topicData.map((topic, index) => (
+          <div key={index}>
+            <h3>{topic.topic}</h3>
+            <p>{topic.description}</p>
+          </div>
+        ))
+      ) : (
+        <div>주제 데이터가 없습니다.</div> // 데이터 없을 때 메시지
+      )}
+      <h2>Suggested Activities</h2>
+      {activityData.length > 0 ? (
+        activityData.map((activity, index) => (
+          <div key={index}>
+            <h3>{activity.activity}</h3>
+            <p>{activity.description}</p>
+          </div>
+        ))
+      ) : (
+        <div>활동 데이터가 없습니다.</div> // 데이터 없을 때 메시지
+      )}
+    </div>
   );
 }
 
