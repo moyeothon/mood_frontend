@@ -3,6 +3,8 @@ import { PageContainer } from '../components/Layout'
 import Header from '../components/Header'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { makeMoim } from '../api/makeMoim'
+import Loading from '../components/Loading'
 
 const Question = styled.div`
   font-size: 14px;
@@ -58,6 +60,7 @@ const GoButton = styled.button`
 `
 const CreateMoim = ()  => {
   const [selectedInfo, setSelectedInfo] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const question = [
@@ -87,20 +90,33 @@ const CreateMoim = ()  => {
 
   };
 
-  const handleMakeMoim = (selectedInfo) => {
-    console.log(selectedInfo);
-    
-    navigate('/topicresult', {
-      state:{
-        host: `${selectedInfo.host}`,
-        relationshipType: `${selectedInfo.relationshipType}`,
-        peopleCount: `${selectedInfo.peopleCount}`,
-        vibe: `${selectedInfo.vibe}`,
-        averageAge: `${selectedInfo.averageAge}`,
-        commonInterests: `${selectedInfo.commonInterests}`,
-        fromCreateMoim: true
+  const handleMakeMoim = async (selectedInfo) => {
+    setIsLoading(true);
+    try {
+      const getTopic = await makeMoim({
+        host: selectedInfo.host,
+        relationshipType: selectedInfo.relationshipType,
+        peopleCount: selectedInfo.peopleCount,
+        vibe: selectedInfo.vibe,
+        averageAge: selectedInfo.averageAge,
+        commonInterests: selectedInfo.commonInterests
+      });
+
+      if (getTopic) {
+        navigate('/topicresult', {
+          state: {
+            topicData: getTopic.data.conversationTopicInfoResDtos,
+            activityData: getTopic.data.suggestedActivityInfoResDtos,
+            gatheringId: getTopic.data.gatheringId,
+            fromCreateMoim: false
+          }
+        });
       }
-    })
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
   const isDisabled =  
     !selectedInfo.host || 
@@ -112,34 +128,42 @@ const CreateMoim = ()  => {
 
   return (
     <>
-      <Header where='/home' />
-      <PageContainer>
-        {Object.keys(moimOption).map((option, index) => (
-          <React.Fragment key={option}>
-          <Question>{question[index]}</Question>
-            <ButtonContainer >
-              {moimOption[option].map((info)=> (                
-                  <Option key={info}
-                    onClick={()=> handleMoimInfo(option, info)}
-                    style={{
-                      backgroundColor: selectedInfo[option] === info ? '#A5E5FF' : '#F2F2F2',
-                    }}
-                  >
-                    {info}
-                  </Option>
-                ))}
-              </ButtonContainer>
-              <Divider />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header where='/home' />
+          <PageContainer>
+            {Object.keys(moimOption).map((option, index) => (
+              <React.Fragment key={option}>
+                <Question>{question[index]}</Question>
+                <ButtonContainer>
+                  {moimOption[option].map((info) => (
+                    <Option
+                      key={info}
+                      onClick={() => handleMoimInfo(option, info)}
+                      style={{
+                        backgroundColor: selectedInfo[option] === info ? '#A5E5FF' : '#F2F2F2',
+                      }}
+                    >
+                      {info}
+                    </Option>
+                  ))}
+                </ButtonContainer>
+                <Divider />
               </React.Fragment>
             ))}
-      </PageContainer>
-      <GoContainer>
-            <GoButton 
-              disabled={isDisabled} 
-              onClick={()=>handleMakeMoim(selectedInfo)}>
-                {isDisabled ? '정보를 모두 선택해주세요 🙌🏻' : 'MOOD 구하러 가기 🔥'}
-  </GoButton>
-        </GoContainer> 
+          </PageContainer>
+          <GoContainer>
+            <GoButton
+              disabled={isDisabled}
+              onClick={() => handleMakeMoim(selectedInfo)}
+            >
+              {isDisabled ? '정보를 모두 선택해주세요 🙌🏻' : 'MOOD 구하러 가기 🔥'}
+            </GoButton>
+          </GoContainer>
+        </>
+      )}
     </>
   );
 }
