@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { makeMoim } from '../api/makeMoim'
 import Loading from '../components/Loading'
+import ErrorModal from '../components/ErrorModal'
 
 const Question = styled.div`
   font-size: 14px;
@@ -61,6 +62,7 @@ const GoButton = styled.button`
 const CreateMoim = ()  => {
   const [selectedInfo, setSelectedInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [showErrorModal, setShowErrorModal] = useState(false);
   const navigate = useNavigate();
 
   const question = [
@@ -114,10 +116,22 @@ const CreateMoim = ()  => {
       }
     } catch (error) {
       console.error(error);
+      if (error.response?.status === 401) {
+        setShowErrorModal(true);
+      }
     } finally {
       setIsLoading(false);
     }
-  }
+  };
+
+  const handleErrorModalClose = () => {
+    setShowErrorModal(false);
+    // 토큰이 만료된 경우 로그인 페이지로 리다이렉트
+    if (!localStorage.getItem('accessToken')) {
+      navigate('/login');
+    }
+  };
+
   const isDisabled =  
     !selectedInfo.host || 
     !selectedInfo.relationshipType || 
@@ -163,6 +177,9 @@ const CreateMoim = ()  => {
             </GoButton>
           </GoContainer>
         </>
+      )}
+      {showErrorModal && (
+        <ErrorModal onClose={handleErrorModalClose} />
       )}
     </>
   );

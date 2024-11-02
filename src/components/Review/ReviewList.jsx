@@ -60,7 +60,7 @@ const ReviewList = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get('https://mood9.shop/api/reviews', {
+        const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/reviews`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('accessToken')}`
           }
