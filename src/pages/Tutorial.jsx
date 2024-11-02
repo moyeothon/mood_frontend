@@ -152,7 +152,6 @@ const HotTopicPhraseDiv = styled.div`
   font-size: 1.6rem;
   font-weight: 900;
   position: absolute;
-
   left: 10%;
   top: 10%;
 `;

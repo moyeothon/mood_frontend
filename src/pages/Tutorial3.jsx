@@ -121,7 +121,6 @@ const HomeReviewDiv = styled.div`
   margin-left: 68%; /* 좌측 여백 */
   margin-right: 6%; /* 우측 여백 */
   cursor: pointer;
-
   span {
     font-weight: 900;
     position: absolute;
@@ -153,7 +152,6 @@ const HotTopicPhraseDiv = styled.div`
   font-size: 1.6rem;
   font-weight: 900;
   position: absolute;
-
   left: 10%;
   top: 10%;
 `;
