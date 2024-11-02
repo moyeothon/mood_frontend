@@ -97,6 +97,7 @@ const HomeRecentMeetingDiv = styled.div`
   margin-left: 6%; /* 좌측 여백 */
   margin-right: 35%; /* 우측 여백 */
   cursor: pointer;
+  z-index: 1001;
 `;
 const RecentMoimphraseDiv = styled.div`
   left: 25%;
@@ -157,15 +158,29 @@ const SmallHotTopicPhraseDiv = styled.div`
   left: 14%;
   top: 25%;
 `;
-
-function Home() {
+const DarkOverlay = styled.div`
+  position: fixed; // 화면에 고정
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); // 어두운 배경 색상 (투명도 0.7)
+  z-index: 1000; // 가장 위에 나타나도록 설정
+  span {
+    position: absolute;
+    top: 53%;
+    left: 5%;
+    color: white;
+  }
+`;
+function Tutorial() {
   const navigate = useNavigate(); // 네비게이트 훅 사용
 
   const handleTutorialClick = () => {
-    navigate("/tutorial");
+    navigate("/hottopic"); // 클릭 시 "/hottopic"으로 이동
   };
   const handleRecentMoimClick = () => {
-    navigate("/recentmoim");
+    navigate("/tutorial2");
   };
   const handleCreateMoimClick = () => {
     navigate("/createmoim");
@@ -175,6 +190,9 @@ function Home() {
   };
   return (
     <>
+      <DarkOverlay>
+        <span>당신이 최근 진행했던 모임을 볼 수 있어요.</span>
+      </DarkOverlay>
       <HomeContainer>
         <SpeechBalloons1Img src={Home_SpeechBalloons} alt="홈_배경_말풍선" />
         <SpeechBalloons2Img src={Home_SpeechBalloons} alt="홈_배경_말풍선" />
@@ -225,4 +243,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Tutorial;

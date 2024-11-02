@@ -142,6 +142,7 @@ const HomeStartDiv = styled.div`
   font-weight: bolder;
   background-color: ${(props) => props.theme.blueColor};
   cursor: pointer;
+  z-index: 1001;
 `;
 
 const HotTopicPhraseDiv = styled.div`
@@ -157,12 +158,26 @@ const SmallHotTopicPhraseDiv = styled.div`
   left: 14%;
   top: 25%;
 `;
-
-function Home() {
+const DarkOverlay = styled.div`
+  position: fixed; // 화면에 고정
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); // 어두운 배경 색상 (투명도 0.7)
+  z-index: 1000; // 가장 위에 나타나도록 설정
+  span {
+    position: absolute;
+    top: 67%;
+    left: 35%;
+    color: white;
+  }
+`;
+function Tutorial3() {
   const navigate = useNavigate(); // 네비게이트 훅 사용
 
   const handleTutorialClick = () => {
-    navigate("/tutorial");
+    navigate("/hottopic"); // 클릭 시 "/hottopic"으로 이동
   };
   const handleRecentMoimClick = () => {
     navigate("/recentmoim");
@@ -170,11 +185,12 @@ function Home() {
   const handleCreateMoimClick = () => {
     navigate("/createmoim");
   };
-  const handleReviewClick = () => {
-    navigate("/review");
-  };
+
   return (
     <>
+      <DarkOverlay>
+        <span>이제 시작해봅시다!</span>
+      </DarkOverlay>
       <HomeContainer>
         <SpeechBalloons1Img src={Home_SpeechBalloons} alt="홈_배경_말풍선" />
         <SpeechBalloons2Img src={Home_SpeechBalloons} alt="홈_배경_말풍선" />
@@ -214,7 +230,7 @@ function Home() {
         </HomeRecentMeetingDiv>
 
         {/** 리뷰  박스 (모임 기록 박스 오른쪽)*/}
-        <HomeReviewDiv onClick={handleReviewClick}>
+        <HomeReviewDiv>
           <span>리뷰하기</span>
         </HomeReviewDiv>
 
@@ -225,4 +241,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Tutorial3;
