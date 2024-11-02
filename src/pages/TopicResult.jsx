@@ -214,7 +214,7 @@ function TopicResult() {
         <Loading/>
       ) : (
       <>
-        <Header />
+        <Header where='/createmoim'/>
         <PageContainer>
           <Title>
             무드가 여러분들을 위한 결과를 가져왔어요 🧊
@@ -261,7 +261,7 @@ function TopicResult() {
           })}
           </Container>
                 <GoContainer>
-            <GoButton onClick={()=>handleNewTopic()}>
+            <GoButton onClick={()=>handleMakeNewTopic(id)}>
               다른 주제 추천 받기 🥶
             </GoButton>
             <GoButton onClick={()=>handleBackToMoimInfo()}>

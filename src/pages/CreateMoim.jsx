@@ -111,7 +111,7 @@ const CreateMoim = ()  => {
 
   return (
     <>
-      <Header />
+      <Header where='/home' />
       <PageContainer>
         {Object.keys(moimOption).map((option, index) => (
           <React.Fragment key={option}>
