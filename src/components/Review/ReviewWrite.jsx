@@ -109,7 +109,7 @@ const ReviewWrite = () => {
     });
 
     try {
-      const response = await axios.post('https://mood9.shop/api/reviews', {
+      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/reviews`, {
         starCount,
         content
       }, {
