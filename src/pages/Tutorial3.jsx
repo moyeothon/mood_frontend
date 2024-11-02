@@ -182,7 +182,7 @@ function Tutorial3() {
     navigate("/recentmoim");
   };
   const handleCreateMoimClick = () => {
-    navigate("/createmoim");
+    navigate("/home");
   };
 
   return (
