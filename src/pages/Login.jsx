@@ -30,7 +30,9 @@ function Login() {
 
   const kakaoLogin = () => {
     localStorage.setItem("provider", "kakao");
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}`;
+    const redirectUri = encodeURIComponent(process.env.REACT_APP_REDIRECT_URI);
+    const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${redirectUri}`;
+    window.location.href = kakaoAuthUrl;
   };
 
   React.useEffect(() => {
