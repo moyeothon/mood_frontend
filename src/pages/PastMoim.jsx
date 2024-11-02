@@ -23,7 +23,7 @@ const ContainerContainer = styled.div`
   top: 130%;
 `;
 const Container = styled.div`
-  width: 110%;
+  width: 115%;
   height: 50%;
   padding: 19px 23px;
   border-radius: 16px;
@@ -107,10 +107,10 @@ function PastMoim() {
     <>
       <Header />
       <PageContainer>
-        <Title>무드가 여러분들을의 소중한 추억을 가져왔어요</Title>
+        <Title>무드가 여러분들의 소중한 추억을 가져왔어요💙</Title>
         <ContainerContainer>
           <Container>
-            <SubTitle>무드의 추천 대화 주제</SubTitle>
+            <SubTitle>무드가 추천했던 대화 주제</SubTitle>
             {topicData &&
               topicData.map((item, index) => {
                 return (
@@ -127,7 +127,7 @@ function PastMoim() {
           </Container>
 
           <Container>
-            <SubTitle>무드의 추천 활동</SubTitle>
+            <SubTitle>무드가 추천했던 활동</SubTitle>
             {activityData &&
               activityData.map((item, index) => {
                 return (
