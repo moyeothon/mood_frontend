@@ -28,32 +28,32 @@ const SpeechBalloons2Img = styled.img`
 const QuestionMarkPinkImg = styled.img`
   position: absolute;
   height: auto;
-  width: 23%;
+  width: 43%;
   object-fit: contain;
-  left: 20%;
-  top: 240%;
+  left: 23%;
+  top: 210%;
 `;
 const QuestionMarkPink2Img = styled.img`
   position: absolute;
   height: auto;
-  width: 23%;
+  width: 43%;
   object-fit: contain;
-  right: 20%;
-  top: 250%;
+  right: -37%;
+  top: 220%;
 `;
 const QuestionMarkBlueImg = styled.img`
   position: absolute;
   height: auto;
-  width: 25%;
+  width: 45%;
   object-fit: contain;
-  right: 38%;
-  top: 170%;
+  right: -3%;
+  top: 150%;
 `;
 const FireImg = styled.img`
   position: absolute;
   height: auto;
-  width: 12%;
-  right: -18%;
+  width: 10%;
+  right: 7%;
 `;
 const MoimImg = styled.img`
   position: absolute;
@@ -63,16 +63,18 @@ const MoimImg = styled.img`
 `;
 const HomeBigPhraseDiv = styled.div`
   position: absolute;
-  left: 5%;
+  left: 7%;
   top: 10%;
+  line-height: 1.25;
   font-size: 1.6rem;
   font-weight: 900;
   /* letter-spacing: -0.06em; */
 `;
 const HomeSmallPhraseDiv = styled.div`
   position: absolute;
-  left: 6%;
+  left: 8%;
   top: 17.9%;
+  line-height: 1.5;
 `;
 const HomeHotTopicDiv = styled.div`
   position: absolute;
@@ -100,10 +102,11 @@ const HomeRecentMeetingDiv = styled.div`
 `;
 const RecentMoimphraseDiv = styled.div`
   left: 25%;
-  top: 30%;
+  top: 27%;
   position: absolute;
   span {
     font-size: 1.3rem;
+    line-height: 1.5;
     font-weight: 900;
   }
 `;
@@ -119,7 +122,7 @@ const HomeReviewDiv = styled.div`
   margin-right: 6%; /* 우측 여백 */
   cursor: pointer;
   z-index: 1001;
-  #reviewText {
+  span {
     font-weight: 900;
     position: absolute;
     left: 19%;
@@ -155,27 +158,29 @@ const HotTopicPhraseDiv = styled.div`
 
 const SmallHotTopicPhraseDiv = styled.div`
   position: absolute;
-  left: 8%;
-  top: 30%;
+  line-height: 1.5;
+  left: 11%;
+  top: 25%;
 `;
 const DarkOverlay = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.7); // 어두운 배경 색상 (투명도 0.7)
+  background-color: rgba(0, 0, 0, 0.8); // 어두운 배경 색상 (투명도 0.7)
   z-index: 1000; // 가장 위에 나타나도록 설정
   span {
+    font-size: large;
     position: absolute;
     top: 53%;
-    left: 25%;
+    left: 12%;
     color: white;
   }
 `;
 function Tutorial2() {
   const navigate = useNavigate(); // 네비게이트 훅 사용
 
-  const handleHotTopicClick = () => {
+  const handleTutorialClick = () => {
     navigate("/hottopic"); // 클릭 시 "/hottopic"으로 이동
   };
   const handleRecentMoimClick = () => {
@@ -208,14 +213,12 @@ function Tutorial2() {
         </HomeSmallPhraseDiv>
 
         {/** 인기주제추천  박스 (중앙 가장 큰 네모)*/}
-        <HomeHotTopicDiv onClick={handleHotTopicClick}>
-          <HotTopicPhraseDiv>
-            이번 달 추천 주제
-            <FireImg src={Home_Fire} />
-          </HotTopicPhraseDiv>
+        <HomeHotTopicDiv onClick={handleTutorialClick}>
+          <HotTopicPhraseDiv>무드가 처음이신가요?</HotTopicPhraseDiv>
           <SmallHotTopicPhraseDiv>
-            최근 사람들이 가장 많이 찾은 주제로 대화
-            <br />를 나누어보아요!
+            차근차근 알려드릴게요.
+            <br />
+            같이 연습해보아요 <FireImg src={Home_Fire} />
             <QuestionMarkPinkImg src={Home_QuestionMark_pink} />
             <QuestionMarkPink2Img src={Home_QuestionMark_pink} />
             <QuestionMarkBlueImg src={Home_QuestionMark_blue} />

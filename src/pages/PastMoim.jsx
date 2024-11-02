@@ -23,7 +23,7 @@ const ContainerContainer = styled.div`
   top: 100%;
 `;
 const Container = styled.div`
-  width: 85%;
+  width: 115%;
   height: 50%;
   padding: 19px 23px;
   border-radius: 16px;
@@ -127,7 +127,7 @@ function PastMoim() {
           </Container>
 
           <Container>
-            <SubTitle>무드가 추천 했던 활동</SubTitle>
+           <SubTitle>무드가 추천했던 활동</SubTitle>
             {activityData &&
               activityData.map((item, index) => {
                 return (
