@@ -30,30 +30,30 @@ const QuestionMarkPinkImg = styled.img`
   height: auto;
   width: 43%;
   object-fit: contain;
-  left: 20%;
-  top: 240%;
+  left: 23%;
+  top: 210%;
 `;
 const QuestionMarkPink2Img = styled.img`
   position: absolute;
   height: auto;
   width: 43%;
   object-fit: contain;
-  right: -20%;
-  top: 250%;
+  right: -37%;
+  top: 220%;
 `;
 const QuestionMarkBlueImg = styled.img`
   position: absolute;
   height: auto;
   width: 45%;
   object-fit: contain;
-  right: 8%;
-  top: 170%;
+  right: -3%;
+  top: 150%;
 `;
 const FireImg = styled.img`
   position: absolute;
   height: auto;
   width: 10%;
-  right: 4%;
+  right: 7%;
 `;
 const MoimImg = styled.img`
   position: absolute;
@@ -63,16 +63,18 @@ const MoimImg = styled.img`
 `;
 const HomeBigPhraseDiv = styled.div`
   position: absolute;
-  left: 5%;
+  left: 7%;
   top: 10%;
+  line-height: 1.25;
   font-size: 1.6rem;
   font-weight: 900;
   /* letter-spacing: -0.06em; */
 `;
 const HomeSmallPhraseDiv = styled.div`
   position: absolute;
-  left: 6%;
+  left: 8%;
   top: 17.9%;
+  line-height: 1.5;
 `;
 const HomeHotTopicDiv = styled.div`
   position: absolute;
@@ -100,10 +102,11 @@ const HomeRecentMeetingDiv = styled.div`
 `;
 const RecentMoimphraseDiv = styled.div`
   left: 25%;
-  top: 30%;
+  top: 27%;
   position: absolute;
   span {
     font-size: 1.3rem;
+    line-height: 1.5;
     font-weight: 900;
   }
 `;
@@ -155,7 +158,8 @@ const HotTopicPhraseDiv = styled.div`
 
 const SmallHotTopicPhraseDiv = styled.div`
   position: absolute;
-  left: 14%;
+  line-height: 1.5;
+  left: 11%;
   top: 25%;
 `;
 const DarkOverlay = styled.div`
@@ -163,12 +167,13 @@ const DarkOverlay = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  background-color: rgba(0, 0, 0, 0.7); // 어두운 배경 색상 (투명도 0.7)
+  background-color: rgba(0, 0, 0, 0.8); // 어두운 배경 색상 (투명도 0.7)
   z-index: 1000; // 가장 위에 나타나도록 설정
   span {
+    font-size: large;
     position: absolute;
     top: 66%;
-    left: 35%;
+    left: 29%;
     color: white;
   }
 `;
@@ -211,7 +216,7 @@ function Tutorial3() {
           <SmallHotTopicPhraseDiv>
             차근차근 알려드릴게요.
             <br />
-            같이 연습해보아요! <FireImg src={Home_Fire} />
+            같이 연습해보아요 <FireImg src={Home_Fire} />
             <QuestionMarkPinkImg src={Home_QuestionMark_pink} />
             <QuestionMarkPink2Img src={Home_QuestionMark_pink} />
             <QuestionMarkBlueImg src={Home_QuestionMark_blue} />

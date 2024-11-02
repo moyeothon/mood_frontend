@@ -15,15 +15,15 @@ const Title = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 100px 0px 30px 0px;
+  margin: 30px 0px 30px 0px;
 `;
 
 const ContainerContainer = styled.div`
   position: absolute;
-  top: 130%;
+  top: 100%;
 `;
 const Container = styled.div`
-  width: 110%;
+  width: 290px;
   height: 50%;
   padding: 19px 23px;
   border-radius: 16px;
@@ -59,9 +59,10 @@ const SubTitle = styled.div`
 const Topic = styled.div`
   width: 85%;
   margin: 0px 5px;
-  font-size: 15px;
+  font-size: 1rem;
   flex-wrap: wrap;
   line-height: 1.5;
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 */
 `;
 
 const ArrowImg = styled.img`
@@ -107,10 +108,10 @@ function PastMoim() {
     <>
       <Header />
       <PageContainer>
-        <Title>무드가 여러분들을의 소중한 추억을 가져왔어요</Title>
+        <Title>무드가 여러분들의 소중한 추억을 가져왔어요 💙</Title>
         <ContainerContainer>
           <Container>
-            <SubTitle>무드의 추천 대화 주제</SubTitle>
+            <SubTitle>무드가 추천했던 주제</SubTitle>
             {topicData &&
               topicData.map((item, index) => {
                 return (
@@ -118,7 +119,6 @@ function PastMoim() {
                     <ContentContainer>
                       <RankImg src={ImgNumber[index]} />
                       <Topic>{item.topic}</Topic>
-                      <ArrowImg src={ForwardArrow} />
                     </ContentContainer>
                     <Divider />
                   </div>
@@ -127,7 +127,7 @@ function PastMoim() {
           </Container>
 
           <Container>
-            <SubTitle>무드의 추천 활동</SubTitle>
+            <SubTitle>무드가 추천했던 활동</SubTitle>
             {activityData &&
               activityData.map((item, index) => {
                 return (
@@ -135,7 +135,6 @@ function PastMoim() {
                     <ContentContainer>
                       <RankImg src={ImgNumber[index]} />
                       <Topic>{item.activity}</Topic>
-                      <ArrowImg src={ForwardArrow} />
                     </ContentContainer>
                     <Divider />
                   </div>

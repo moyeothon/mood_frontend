@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useCallback } from 'react'
-import { PageContainer } from '../components/Layout'
-import Header from '../components/Header'
-import styled from 'styled-components'
-import ForwardArrow from '../assets/images/ForwardArrow.png'
-import First from '../assets/images/1.png'
-import Second from '../assets/images/2.png'
-import Third from '../assets/images/3.png'
-import { useLocation, useNavigate } from 'react-router-dom'
-import { makeMoim } from '../api/makeMoim'
-import { makeNewTopic } from '../api/makeNewTopic'
-import Loading from '../components/Loading'
-import ErrorModal from '../components/ErrorModal'
+import React, { useEffect, useState, useCallback } from "react";
+import { PageContainer } from "../components/Layout";
+import Header from "../components/Header";
+import styled from "styled-components";
+import ForwardArrow from "../assets/images/ForwardArrow.png";
+import First from "../assets/images/1.png";
+import Second from "../assets/images/2.png";
+import Third from "../assets/images/3.png";
+import { useLocation, useNavigate } from "react-router-dom";
+import { makeMoim } from "../api/makeMoim";
+import { makeNewTopic } from "../api/makeNewTopic";
+import Loading from "../components/Loading";
+import ErrorModal from "../components/ErrorModal";
 
 const Title = styled.div`
   font-size: 16px;
@@ -19,30 +19,30 @@ const Title = styled.div`
   justify-content: center;
   align-items: center;
   margin: 10px 0px 30px 0px;
-`
+`;
 const Container = styled.div`
-    width: 86%;
-    height: 50%;
-    padding: 19px 23px;
-    border-radius: 16px;
-    border: 1px solid rgba(0,0,0,0.1);
-    margin-bottom: 10px;
-`
+  width: 86%;
+  height: 50%;
+  padding: 19px 23px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+`;
 const Divider = styled.div`
   width: 100%;
-  background-color: rgba(0,0,0,0.03);
+  background-color: rgba(0, 0, 0, 0.03);
   height: 1px;
-`
+`;
 
 const ContentContainer = styled.div`
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between; //수정
-    margin: 10px 0px;
-    cursor: pointer;
-`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; //수정
+  margin: 10px 0px;
+  cursor: pointer;
+`;
 
 const SubTitle = styled.div`
   width: 100%;
@@ -52,21 +52,21 @@ const SubTitle = styled.div`
   justify-content: start;
   align-items: center;
   margin-bottom: 20px;
-`
+`;
 const Topic = styled.div`
   width: 85%;
   margin: 0px 5px;
   font-size: 15px;
   flex-wrap: wrap;
   line-height: 1.5;
-`
+`;
 const ArrowImg = styled.img`
   width: 3%;
-`
+`;
 const RankImg = styled.img`
   margin-right: 5px;
   width: 8%;
-`
+`;
 const GoButton = styled.button`
   width: 90%;
   height: 45px;
@@ -75,14 +75,14 @@ const GoButton = styled.button`
   border: none;
   border-radius: 8px;
   font-size: 16px;
-  font-family:  ${({ theme }) => theme.fonts.extrabold};
+  font-family: ${({ theme }) => theme.fonts.extrabold};
   cursor: pointer;
   margin-bottom: 10px;
-  
+
   &:hover {
     background-color: ${({ theme }) => theme.mainColor};
   }
-`
+`;
 const GoContainer = styled.div`
   width: 100%;
   height: 150px;
@@ -90,7 +90,7 @@ const GoContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-`
+`;
 
 function TopicResult() {
   const location = useLocation();
@@ -106,7 +106,6 @@ function TopicResult() {
 
   const ImgNumber = [First, Second, Third];
 
-
   //주제 생성하기
   const makeTopic = async () => {
     setIsLoading(true);
@@ -119,34 +118,33 @@ function TopicResult() {
         data.peopleCount,
         data.vibe,
         data.averageAge,
-        data.commonInterests
+        data.commonInterests,
       ];
-        return fieldsToCheck.some(field => field === null);
-      };
-      
+      return fieldsToCheck.some((field) => field === null);
+    };
+
     try {
       const getTopic = await makeMoim(moimInfo);
       console.log(getTopic.data);
 
       if (getTopic) {
-        setTopicData(getTopic.data.conversationTopicInfoResDtos)
-        setActivityData(getTopic.data.suggestedActivityInfoResDtos)
+        setTopicData(getTopic.data.conversationTopicInfoResDtos);
+        setActivityData(getTopic.data.suggestedActivityInfoResDtos);
         setId(getTopic.data.gatheringId);
       }
 
-      if(checkForNullValues(getTopic)) {
-        setIsNull(true)
+      if (checkForNullValues(getTopic)) {
+        setIsNull(true);
       }
-
     } catch (error) {
       if (error.status === 401 || isNull) {
         console.error(error);
-        setShowErrorModal(true)
+        setShowErrorModal(true);
       }
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   //마운트 시 모임 생성 api 호출
   useEffect(() => {
@@ -162,42 +160,41 @@ function TopicResult() {
 
   //모임 정보 다시 입력하기
   const handleBackToMoimInfo = () => {
-    navigate('/createmoim');
-  }
+    navigate("/createmoim");
+  };
 
   //다른 주제 추천받기
   const handleMakeNewTopic = async (id) => {
     setIsLoading(true);
     try {
       const getNewTopic = await makeNewTopic(id);
-      console.log('new:', getNewTopic.data);
+      console.log("new:", getNewTopic.data);
 
       if (getNewTopic) {
-        setTopicData(getNewTopic.data.conversationTopicInfoResDtos)
-        setActivityData(getNewTopic.data.suggestedActivityInfoResDtos)
+        setTopicData(getNewTopic.data.conversationTopicInfoResDtos);
+        setActivityData(getNewTopic.data.suggestedActivityInfoResDtos);
       }
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
-    }}
-
+    }
+  };
 
   const handleErrorModal = () => {
     makeTopic();
     setShowErrorModal(false);
-    }
+  };
 
+  const handleTopicClick = (topic, description) => {
+    navigate("/topicdetail", {
+      state: {
+        title: topic,
+        description: description,
+      },
+    });
+  };
 
-    const handleTopicClick = (topic, description) => {
-      navigate('/topicdetail', {
-        state: {
-          title: topic,
-          description: description
-        }
-      });
-    };
-  
   // 더미데이터
   // const topicData = {
   //   "conversationTopicInfoResDtos": [
@@ -216,79 +213,70 @@ function TopicResult() {
   //   ]
   // }
 
-    return (
-      <>
+  return (
+    <>
       {isLoading ? (
-        <Loading/>
+        <Loading />
       ) : (
-      <>
-        <Header where='/createmoim'/>
-        <PageContainer>
-          <Title>
-            무드가 여러분들을 위한 결과를 가져왔어요 🧊
-          </Title>
-          <Container>
-
-                <SubTitle>
-                  무드의 추천 대화 주제
-                </SubTitle>
-                {topicData && topicData.conversationTopicInfoResDtos.map((item, index) => {
+        <>
+          <Header where="/home" />
+          <PageContainer>
+            <Title>무드가 여러분들을 위한 결과를 가져왔어요 🧊</Title>
+            <Container>
+              <SubTitle>무드의 추천 대화 주제</SubTitle>
+              {topicData &&
+                topicData.conversationTopicInfoResDtos.map((item, index) => {
                   return (
                     <React.Fragment key={item.topic}>
-                      <ContentContainer 
-                    onClick={() => handleTopicClick(item.topic, item.description)}
-                  >
+                      <ContentContainer
+                        onClick={() =>
+                          handleTopicClick(item.topic, item.description)
+                        }
+                      >
                         <RankImg src={ImgNumber[index]} />
                         <Topic>{item.topic}</Topic>
                         <ArrowImg src={ForwardArrow} />
                       </ContentContainer>
                       <Divider />
                     </React.Fragment>
-                  )
+                  );
                 })}
-              </Container>
+            </Container>
 
-          <Container>
-
-          <SubTitle>
-            무드의 추천 활동
-          </SubTitle>
-          {activitydata && activitydata.suggestedActivityInfoResDtos.map((item, index) => {
-            return (
-              <React.Fragment key={item.activity}>
-                <ContentContainer 
-                  onClick={() => handleTopicClick(item.activity, item.description)}
-                >
-                  <RankImg src={ImgNumber[index]} />
-                  <Topic>{item.activity}</Topic>
-                  <ArrowImg src={ForwardArrow} />
-                </ContentContainer>
-                <Divider />
-              </React.Fragment>
-            )
-          })}
-          </Container>
-                <GoContainer>
-            <GoButton onClick={()=>handleMakeNewTopic(id)}>
-              다른 주제 추천 받기 🥶
-            </GoButton>
-            <GoButton onClick={()=>handleBackToMoimInfo()}>
-              모임 정보 다시 입력하기 
-            </GoButton>
-          </GoContainer> 
-
+            <Container>
+              <SubTitle>무드의 추천 활동</SubTitle>
+              {activitydata &&
+                activitydata.suggestedActivityInfoResDtos.map((item, index) => {
+                  return (
+                    <React.Fragment key={item.activity}>
+                      <ContentContainer
+                        onClick={() =>
+                          handleTopicClick(item.activity, item.description)
+                        }
+                      >
+                        <RankImg src={ImgNumber[index]} />
+                        <Topic>{item.activity}</Topic>
+                        <ArrowImg src={ForwardArrow} />
+                      </ContentContainer>
+                      <Divider />
+                    </React.Fragment>
+                  );
+                })}
+            </Container>
+            <GoContainer>
+              <GoButton onClick={() => handleMakeNewTopic(id)}>
+                다른 주제 추천 받기 🥶
+              </GoButton>
+              <GoButton onClick={() => handleBackToMoimInfo()}>
+                모임 정보 다시 입력하기
+              </GoButton>
+            </GoContainer>
           </PageContainer>
         </>
       )}
-      {showErrorModal && (
-        <ErrorModal
-          onClose={handleErrorModal}
-        />
-      )}
-      
+      {showErrorModal && <ErrorModal onClose={handleErrorModal} />}
     </>
-
   );
 }
 
-  export default TopicResult;
+export default TopicResult;
