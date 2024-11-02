@@ -8,7 +8,7 @@ import ReviewPencil from '../../assets/images/ReviewPencil.png';
 
 const ReviewListContainer = styled.div`
   padding: 0px;
-  margin-top: 50px;
+  margin-top: 10px;
   text-align: center;
 `;
 

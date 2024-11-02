@@ -24,6 +24,7 @@ const LogoImg = styled.img`
 `
 const BackArrowImg = styled.img`
     width: 5%;
+    cursor: pointer;
 `
 function Header({ where}) {
     const navigate = useNavigate();

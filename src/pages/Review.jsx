@@ -6,7 +6,7 @@ import ReviewList from '../components/Review/ReviewList';
 function Review() {
   return (
     <>
-      <Header />
+      <Header where='/home'/>
       <PageContainer>
         <ReviewList />
       </PageContainer>
