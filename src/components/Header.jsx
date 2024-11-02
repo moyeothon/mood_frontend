@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import Logo from '../assets/images/Logo_with_RescueMe.png'
 import BackArrow from '../assets/images/BackArrow.png'
+import { useNavigate } from 'react-router-dom';
 
 const HeaderContainer = styled.div`
     width: 100%;
@@ -24,11 +25,12 @@ const LogoImg = styled.img`
 const BackArrowImg = styled.img`
     width: 5%;
 `
-function Header() {
+function Header({ where}) {
+    const navigate = useNavigate();
   return (
     <>
         <HeaderContainer>
-            <BackArrowImg src={BackArrow} />
+            <BackArrowImg src={BackArrow} onClick={() => navigate(where.startsWith('/') ? where : `/${where}`)}/>
             <LogoContainer>
                 <LogoImg src={Logo}/>
             </LogoContainer>

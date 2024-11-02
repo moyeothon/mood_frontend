@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import LoadingGif from "../assets/images/Animation - 1730478575762.gif";
+import styled from "styled-components"
+import LoadingGif from '../assets/images/Loading.gif'
 
 const Background = styled.div`
   width: 100%;
