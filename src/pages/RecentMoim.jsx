@@ -161,15 +161,14 @@ function RecentMoim() {
             {Array.from({ length: totalMeetings }, (_, index) => {
               if (index < meetings.length) {
                 const meeting = meetings[index];
-                // 올바른 날짜 형식으로 변환
-                const formattedDate = new Date(
-                  meeting.createdAt
-                ).toLocaleDateString("ko-KR", {
-                  year: "numeric",
-                  month: "2-digit",
-                  day: "2-digit",
-                });
-
+                const formattedDate = new Date(meeting.createdAt)
+                  .toLocaleDateString("ko-KR", {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  })
+                  .replace(/\. /g, ".")
+                  .replace(/\.$/, "");
                 return (
                   <MeetingLi
                     key={meeting.gatheringId}
