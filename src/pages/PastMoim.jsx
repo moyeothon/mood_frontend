@@ -23,7 +23,7 @@ const ContainerContainer = styled.div`
   top: 100%;
 `;
 const Container = styled.div`
-  width: 115%;
+  width: 290px;
   height: 50%;
   padding: 19px 23px;
   border-radius: 16px;
@@ -62,6 +62,7 @@ const Topic = styled.div`
   font-size: 1rem;
   flex-wrap: wrap;
   line-height: 1.5;
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 */
 `;
 
 const ArrowImg = styled.img`
@@ -126,7 +127,7 @@ function PastMoim() {
           </Container>
 
           <Container>
-           <SubTitle>무드가 추천했던 활동</SubTitle>
+            <SubTitle>무드가 추천했던 활동</SubTitle>
             {activityData &&
               activityData.map((item, index) => {
                 return (
