@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const HeaderContainer = styled.div`
   width: 100%;
-  height: 62px;
+  height: 57px;
   box-shadow: 0px 0px 6px rgb(0, 0, 0, 0.12);
   display: flex;
   flex-direction: row;
@@ -23,7 +23,7 @@ const BackArrowImg = styled.img`
 const MeetingUL = styled.ul`
   list-style: none;
   padding: 0;
-  margin-top: 60%;
+  margin-top: 40%;
 `;
 
 const MeetingLi = styled.div`
@@ -71,7 +71,7 @@ const RecentMoimCatchPhrase = styled.div`
 
 const RecentMoimRecentPhrase = styled.div`
   position: absolute;
-  top: 32%;
+  top: 25%;
   font-weight: 900;
   left: 8%;
 `;

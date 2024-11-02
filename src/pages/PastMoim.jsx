@@ -23,7 +23,7 @@ const ContainerContainer = styled.div`
   top: 130%;
 `;
 const Container = styled.div`
-  width: 86%;
+  width: 110%;
   height: 50%;
   padding: 19px 23px;
   border-radius: 16px;
