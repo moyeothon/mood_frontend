@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { PageContainer } from '../components/Layout'
 import Header from '../components/Header'
 import styled from 'styled-components'
@@ -150,10 +150,15 @@ function TopicResult() {
 
   //마운트 시 모임 생성 api 호출
   useEffect(() => {
-    if(location.state?.fromCreateMoim) {
+    if (location.state?.topicData && location.state?.activityData) {
+      setTopicData(location.state.topicData);
+      setActivityData(location.state.activityData);
+      setId(location.state.gatheringId);
+      setIsLoading(false);
+    } else if (location.state?.fromCreateMoim) {
       makeTopic();
     }
-  }, [location.state])
+  }, [location.state]);
 
   //모임 정보 다시 입력하기
   const handleBackToMoimInfo = () => {

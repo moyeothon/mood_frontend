@@ -12,32 +12,48 @@ const HeaderContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    `
-const LogoContainer = styled.div   `
+`
+
+const LogoContainer = styled.div`
     width: 90%;
     display: flex;
     align-items: center;
     justify-content: center;
 `
+
 const LogoImg = styled.img`
     width: 25%;
 `
+
 const BackArrowImg = styled.img`
     width: 5%;
     cursor: pointer;
 `
-function Header({ where}) {
+
+function Header({ where }) {
     const navigate = useNavigate();
-  return (
-    <>
-        <HeaderContainer>
-            <BackArrowImg src={BackArrow} onClick={() => navigate(where.startsWith('/') ? where : `/${where}`)}/>
-            <LogoContainer>
-                <LogoImg src={Logo}/>
-            </LogoContainer>
-        </HeaderContainer>
-    </>
-  )
+
+    const handleBackClick = () => {
+        if (window.history.state && window.history.state.idx > 0) {
+            navigate(-1);
+        } else {
+            navigate(where.startsWith('/') ? where : `/${where}`);
+        }
+    };
+
+    return (
+        <>
+            <HeaderContainer>
+                <BackArrowImg 
+                    src={BackArrow} 
+                    onClick={handleBackClick}
+                />
+                <LogoContainer>
+                    <LogoImg src={Logo}/>
+                </LogoContainer>
+            </HeaderContainer>
+        </>
+    );
 }
 
 export default Header;
