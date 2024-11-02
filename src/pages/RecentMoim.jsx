@@ -60,10 +60,14 @@ const NoMeetingsMessage = styled.div`
 const UserNameDiv = styled.div`
   text-align: center;
   margin-top: 14%;
+  span {
+    color: #a5e5ff;
+  }
 `;
 
 const RecentMoimCatchPhrase = styled.div`
   position: absolute;
+  line-height: 1.5;
   top: 11%;
   left: 22%;
   width: 120%;
@@ -95,6 +99,7 @@ const RecentToHomeDiv = styled.div`
 
 function RecentMoim() {
   const [meetings, setMeetings] = useState([]);
+  const [myNickname, setMyNickname] = useState(""); // 추가
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -126,6 +131,7 @@ function RecentMoim() {
           }
         );
         setMeetings(response.data.data.gatherings);
+        setMyNickname(response.data.data.myNickname); // 추가
       } catch (error) {
         setError(error);
       } finally {
@@ -140,7 +146,6 @@ function RecentMoim() {
   if (error) return <div>Error: {error.message}</div>;
 
   const totalMeetings = 5; // 항상 5개의 항목 표시
-
   return (
     <>
       <HeaderContainer>
@@ -149,7 +154,9 @@ function RecentMoim() {
       <PageContainer>
         <div>
           <UserNameDiv>
-            <h2>구해줘_내_성대님</h2>
+            <h2>
+              <span id="UserName">{myNickname}</span>님
+            </h2>
           </UserNameDiv>
           <RecentMoimCatchPhrase>
             <p>당신의 모임은 언제나 특별해요!</p>
