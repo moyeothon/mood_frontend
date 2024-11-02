@@ -140,7 +140,7 @@ function RecentMoim() {
 
       try {
         const response = await axios.get(
-          "https://mood9.shop/api/gatherings/my",
+          `${process.env.REACT_APP_API_BASE_URL}/api/gatherings/my`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
