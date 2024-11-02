@@ -28,7 +28,7 @@ const SpeechBalloons2Img = styled.img`
 const QuestionMarkPinkImg = styled.img`
   position: absolute;
   height: auto;
-  width: 43%;
+  width: 23%;
   object-fit: contain;
   left: 20%;
   top: 240%;
@@ -36,24 +36,24 @@ const QuestionMarkPinkImg = styled.img`
 const QuestionMarkPink2Img = styled.img`
   position: absolute;
   height: auto;
-  width: 43%;
+  width: 23%;
   object-fit: contain;
-  right: -20%;
+  right: 20%;
   top: 250%;
 `;
 const QuestionMarkBlueImg = styled.img`
   position: absolute;
   height: auto;
-  width: 45%;
+  width: 25%;
   object-fit: contain;
-  right: 8%;
+  right: 38%;
   top: 170%;
 `;
 const FireImg = styled.img`
   position: absolute;
   height: auto;
-  width: 10%;
-  right: 4%;
+  width: 12%;
+  right: -18%;
 `;
 const MoimImg = styled.img`
   position: absolute;
@@ -118,7 +118,8 @@ const HomeReviewDiv = styled.div`
   margin-left: 68%; /* 좌측 여백 */
   margin-right: 6%; /* 우측 여백 */
   cursor: pointer;
-  span {
+  z-index: 1001;
+  #reviewText {
     font-weight: 900;
     position: absolute;
     left: 19%;
@@ -154,15 +155,29 @@ const HotTopicPhraseDiv = styled.div`
 
 const SmallHotTopicPhraseDiv = styled.div`
   position: absolute;
-  left: 14%;
-  top: 25%;
+  left: 8%;
+  top: 30%;
 `;
-
-function Home() {
+const DarkOverlay = styled.div`
+  position: fixed; // 화면에 고정
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); // 어두운 배경 색상 (투명도 0.7)
+  z-index: 1000; // 가장 위에 나타나도록 설정
+  span {
+    position: absolute;
+    top: 53%;
+    left: 25%;
+    color: white;
+  }
+`;
+function Tutorial2() {
   const navigate = useNavigate(); // 네비게이트 훅 사용
 
-  const handleTutorialClick = () => {
-    navigate("/tutorial");
+  const handleHotTopicClick = () => {
+    navigate("/hottopic"); // 클릭 시 "/hottopic"으로 이동
   };
   const handleRecentMoimClick = () => {
     navigate("/recentmoim");
@@ -171,10 +186,13 @@ function Home() {
     navigate("/createmoim");
   };
   const handleReviewClick = () => {
-    navigate("/review");
+    navigate("/tutorial3");
   };
   return (
     <>
+      <DarkOverlay>
+        <span>서비스에 대한 리뷰를 작성할 수 있어요.</span>
+      </DarkOverlay>
       <HomeContainer>
         <SpeechBalloons1Img src={Home_SpeechBalloons} alt="홈_배경_말풍선" />
         <SpeechBalloons2Img src={Home_SpeechBalloons} alt="홈_배경_말풍선" />
@@ -191,12 +209,14 @@ function Home() {
         </HomeSmallPhraseDiv>
 
         {/** 인기주제추천  박스 (중앙 가장 큰 네모)*/}
-        <HomeHotTopicDiv onClick={handleTutorialClick}>
-          <HotTopicPhraseDiv>무드가 처음이신가요?</HotTopicPhraseDiv>
+        <HomeHotTopicDiv onClick={handleHotTopicClick}>
+          <HotTopicPhraseDiv>
+            이번 달 추천 주제
+            <FireImg src={Home_Fire} />
+          </HotTopicPhraseDiv>
           <SmallHotTopicPhraseDiv>
-            차근차근 알려드릴게요.
-            <br />
-            같이 연습해보아요! <FireImg src={Home_Fire} />
+            최근 사람들이 가장 많이 찾은 주제로 대화
+            <br />를 나누어보아요!
             <QuestionMarkPinkImg src={Home_QuestionMark_pink} />
             <QuestionMarkPink2Img src={Home_QuestionMark_pink} />
             <QuestionMarkBlueImg src={Home_QuestionMark_blue} />
@@ -215,7 +235,7 @@ function Home() {
 
         {/** 리뷰  박스 (모임 기록 박스 오른쪽)*/}
         <HomeReviewDiv onClick={handleReviewClick}>
-          <span>리뷰하기</span>
+          <span id="reviewText">리뷰하기</span>
         </HomeReviewDiv>
 
         {/** 시작하기  박스 (가장 밑 파란색)*/}
@@ -225,4 +245,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Tutorial2;

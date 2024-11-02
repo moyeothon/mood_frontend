@@ -24,7 +24,7 @@ export const makeMoim = async ({
   }
 };
 
-export const makePastMoim = async (id) => {
+export const getMoim = async (id) => {
   try {
     const response = await instance.get(`/api/gatherings/${id}`);
     return response.data;
