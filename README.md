@@ -11,6 +11,14 @@
 > 우리는 **9해줘 무드**, 모임에서 어색한 순간을 없애기 위해 모였습니다!  
 **기술**과 **재미**를 결합해 최고의 서비스를 만들기 위해 달리는 중입니다. 🚀
 
+|팀원 소개|
+|------|---|---|
+|<img src="/Users/choyunhae/Downloads/윤현승.jpeg" width='200px' height='300px' />|테스트2|<img src="/Users/choyunhae/Downloads/민경진.jpeg" width='200px' height='300px' />|
+|프론트 윤현승|프론트 조윤해|프론트 민경진|
+|프론트 윤현승|프론트 조윤해|프론트 민경진|
+|백엔드 최기웅|백엔드 유지호|팀 9해줘 무드|
+
+
 <br>
 
 ## 🔄 Pull Request (PR) 가이드라인
